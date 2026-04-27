@@ -8,7 +8,7 @@
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "build:prod": "npx prisma generate && vite build",
-    "start": "node dist/server/server.js",
+    "start": "node server.mjs",
     "preview": "vite preview",
     "db:migrate": "npx prisma migrate deploy",
     "db:seed": "npx tsx prisma/seed.ts",
