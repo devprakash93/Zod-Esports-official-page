@@ -10,7 +10,7 @@
     "build:prod": "npx prisma generate && vite build",
     "start": "node dist/server/server.js",
     "preview": "vite preview",
-    "db:push": "npx prisma db push",
+    "db:migrate": "npx prisma migrate deploy",
     "db:seed": "npx tsx prisma/seed.ts",
     "lint": "eslint .",
     "format": "prettier --write ."
