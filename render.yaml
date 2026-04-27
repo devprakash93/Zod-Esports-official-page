@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: zod-esports-hub
+    runtime: node
+    region: singapore
+    plan: free
+    buildCommand: npm install && npm run build:prod && npx prisma db push && npx tsx prisma/seed.ts
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true
+      - key: DATABASE_URL
+        value: file:/opt/render/project/src/prisma/prod.db
+    disk:
+      name: zod-data
+      mountPath: /opt/render/project/src/prisma
+      sizeGB: 1

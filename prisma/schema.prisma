@@ -1,0 +1,95 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  role      String   @default("PLAYER") // ADMIN, MANAGER, PLAYER
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Player {
+  id        String   @id @default(uuid())
+  name      String
+  ign       String   @unique
+  role      String
+  image     String
+  kd        Float
+  finishes  Int
+  accuracy  Float
+  headshot  Float    @default(0.0) // New: Headshot %
+  matches   Int      @default(0)   // New: Matches Played
+  winRate   Float    @default(0.0) // New: Win Rate %
+  mvp       Int
+  status    String   @default("active") // active or past
+  insta     String?  // Instagram link
+  yt        String?  // YouTube link
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Tournament {
+  id        String   @id @default(uuid())
+  name      String
+  placement String
+  prize     String
+  date      String
+  status    String // won, live, upcoming
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Scrim {
+  id        String   @id @default(uuid())
+  date      String
+  lobby     String
+  placement Int
+  points    Int
+  kills     Int      @default(0) // New: Kills per scrim
+  mvp       String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model News {
+  id        String   @id @default(uuid())
+  title     String
+  date      String
+  category  String
+  excerpt   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Tryout {
+  id         String   @id @default(uuid())
+  name       String
+  ign        String
+  uid        String
+  kd         String
+  device     String   @default("Unknown") // New: Mobile Device
+  contact    String
+  experience String
+  status     String   @default("PENDING") // PENDING, SHORTLISTED, REJECTED, ACCEPTED
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Merch {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  price       Float
+  image       String
+  status      String   @default("AVAILABLE") // AVAILABLE, OUT_OF_STOCK
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
